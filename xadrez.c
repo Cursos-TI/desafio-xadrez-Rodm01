@@ -2,6 +2,7 @@
 
 // Função recursiva para mover a Torre
 // Cada chamada imprime "Direita" e chama a função novamente até que o contador chegue a zero
+//por: Rodolfo Assunçao
 void moverTorre(int movimento_torre) {
     if (movimento_torre == 0) return; // Caso base: quando o número de movimentos chega a zero
     printf("Direita\n");
