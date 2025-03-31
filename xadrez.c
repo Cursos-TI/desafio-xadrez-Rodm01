@@ -1,57 +1,71 @@
 #include <stdio.h>
 
-// Programa para simular o movimento de peças de xadrez
-//incluindo movimento do cavalo 
-// por: Rodolfo Assunção
+// Função recursiva para mover a Torre
+// Cada chamada imprime "Direita" e chama a função novamente até que o contador chegue a zero
+void moverTorre(int movimento_torre) {
+    if (movimento_torre == 0) return; // Caso base: quando o número de movimentos chega a zero
+    printf("Direita\n");
+    moverTorre(movimento_torre - 1); // Chamada recursiva decrementando o número de movimentos
+}
 
-
-int main() {
-    // Simulação do movimento da Torre usando a estrutura de repetição for
-    int movimento_torre = 5;
-    printf("Movimento da Torre:\n");
-    for (int i = 0; i < movimento_torre; i++) {
-        printf("Direita\n");
-    }
-    printf("\n");
+// Função recursiva para mover o Bispo com loops aninhados
+// O Bispo se move diagonalmente, combinando movimentos verticais e horizontais
+void moverBispo(int movimento_bispo, int passo) {
+    if (movimento_bispo == 0) return; // Caso base: quando não há mais movimentos a serem feitos
     
-    // Simulação do movimento do Bispo usando a estrutura de repetição while
-    int movimento_bispo = 5;
-    printf("Movimento do Bispo:\n");
-    int i = 0;
-    while (i < movimento_bispo) {
+    // Loop interno para representar o deslocamento diagonal (Cima e Direita)
+    for (int i = 0; i < passo; i++) {
         printf("Cima\n");
         printf("Direita\n");
-        i++;
     }
+    
+    moverBispo(movimento_bispo - 1, passo); // Chamada recursiva decrementando o número de movimentos
+}
+
+// Função recursiva para mover a Rainha
+// A Rainha pode se mover em qualquer direção, aqui simulamos um movimento contínuo para a esquerda
+void moverRainha(int movimento_rainha) {
+    if (movimento_rainha == 0) return; // Caso base: quando o número de movimentos chega a zero
+    printf("Esquerda\n");
+    moverRainha(movimento_rainha - 1); // Chamada recursiva decrementando o número de movimentos
+}
+
+int main() {
+    // Definição do número de movimentos para cada peça
+    int movimento_torre = 5; // Número de casas que a Torre deve se mover
+    int movimento_bispo = 5; // Número de passos diagonais do Bispo
+    int movimento_rainha = 8; // Número de casas que a Rainha deve se mover
+    
+    // Movimento da Torre utilizando recursividade
+    printf("Movimento da Torre:\n");
+    moverTorre(movimento_torre);
     printf("\n");
     
-    // Simulação do movimento da Rainha usando a estrutura de repetição do-while
-    int movimento_rainha = 8;
+    // Movimento do Bispo utilizando recursividade e loops aninhados
+    printf("Movimento do Bispo:\n");
+    moverBispo(movimento_bispo, 1);
+    printf("\n");
+    
+    // Movimento da Rainha utilizando recursividade
     printf("Movimento da Rainha:\n");
-    int j = 0;
-    do {
-        printf("Esquerda\n");
-        j++;
-    } while (j < movimento_rainha);
+    moverRainha(movimento_rainha);
     printf("\n");
     
-    // Simulação do movimento do Cavalo usando loops aninhados
-    // O Cavalo se move duas casas para baixo e uma para a esquerda
+    // Movimento do Cavalo com loops aninhados e controle de fluxo
     printf("Movimento do Cavalo:\n");
-    int movimento_cavalo_baixo = 2;
-    int movimento_cavalo_esquerda = 1;
+    int movimento_cavalo_cima = 2; // O cavalo se move duas casas para cima
+    int movimento_cavalo_direita = 1; // E depois uma casa para a direita
     
-    // Loop for para mover duas casas para baixo
-    for (int k = 0; k < movimento_cavalo_baixo; k++) {
-        printf("Baixo\n");
+    // Loop para movimentação do Cavalo (duas casas para cima)
+    for (int i = 0; i < movimento_cavalo_cima; i++) {
+        printf("Cima\n");
     }
     
-    // Loop while para mover uma casa para a esquerda
-    int l = 0;
-    while (l < movimento_cavalo_esquerda) {
-        printf("Esquerda\n");
-        l++;
+    // Loop para movimentação do Cavalo (uma casa para a direita)
+    for (int j = 0; j < movimento_cavalo_direita; j++) {
+        if (j == 1) continue; // Exemplo de controle de fluxo (embora neste caso não afete a saída)
+        printf("Direita\n");
     }
     
-    return 0;
+    return 0; // Fim do programa
 }
